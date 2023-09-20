@@ -2,6 +2,12 @@
 
 A simple and interactive console application developed in Java, leveraging **Azure AI services** for translating user input text between various languages using the Translator API.
 
+## Preview
+
+Here is a quick preview of the User Input Translator in action:
+
+![User Input Translator Demo](media/user-input-translator-app.gif)
+
 ## Overview
 
 This console application was developed as part of a TechBridge assignment while I was preparing for the Microsoft Azure AZ-900 certification. I utilized the Azure AI Translator service to add a real-world application element to the concepts I was learning. The goal was to create a small Java program that meets the following requirements as per the assignment prompt:
