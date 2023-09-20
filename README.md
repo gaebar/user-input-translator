@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project was developed as part of a TechBridge assignment while preparing for the Microsoft Azure AZ-900 certification. I decided to utilize the Azure Translator Text API to provide a real-world application of the concepts studied during the course. The assignment tasked us with creating a small Java program that meets the criteria outlined in the prompt below:
+This console application was developed as part of a TechBridge assignment while I was preparing for the Microsoft Azure AZ-900 certification. I decided to integrate the Azure Translator Text API to give a real-world application to the concepts I was learning. The goal was to create a small Java program that meets the following requirements as per the assignment prompt:
 
 "Get Creative! Create a small program that takes user input using a scanner and any data type. Display the value input. Then, perform some type of manipulation on that value and display that result. Do your best to incorporate as many elements from the lesson. (Data types, Operators, Input, Output, and Comments.)"
 
