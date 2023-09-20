@@ -1,5 +1,7 @@
 # User Input Translator
 
+A simple and interactive console application developed in Java that translates user input text between various languages utilizing the Azure Translator Text API.
+
 ## Overview
 
 This console application was developed as part of a TechBridge assignment while I was preparing for the Microsoft Azure AZ-900 certification. I decided to integrate the Azure Translator Text API to give a real-world application to the concepts I was learning. The goal was to create a small Java program that meets the following requirements as per the assignment prompt:
