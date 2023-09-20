@@ -6,44 +6,47 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
+import io.github.cdimascio.dotenv.Dotenv;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
-        // Step 1: Introduction
-        // Comments describing the program
+        // Introduction: This program translates a user-inputted phrase to a selected
+        // language using Azure API
 
-        // Step 2: Import Necessary Libraries
+        // Import necessary libraries
         Scanner scanner = new Scanner(System.in);
         HttpClient client = HttpClient.newHttpClient();
+        Dotenv dotenv = Dotenv.load();
 
-        // Step 3: Collect user input
-        // Prompting the user to input a phrase to translate and the language code to
-        // translate to
+        // Collect user input
         System.out.print("Enter the phrase to translate: ");
         String phrase = scanner.nextLine();
         System.out.print(
                 "Enter the language code to translate to (e.g., 'it' for Italian, 'es' for Spanish, 'fr' for French, 'zh' for Chinese): ");
         String languageCode = scanner.nextLine();
 
-        // Step 4: Data Manipulation (forming the API request URL)
+        // Data Manipulation: forming the API request URL
         String apiUrl = "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=" + languageCode;
-        String body = "[{'Text':'" + phrase + "'}]";
+        String body = "[{\"Text\":\"" + phrase + "\"}]";
 
-        // Step 5: API Interaction
+        String azureApiKey = dotenv.get("AZURE_API_KEY");
+        String apiRegion = dotenv.get("API_REGION");
+
+        // API Interaction
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(apiUrl))
                 .header("Content-Type", "application/json")
-                .header("Ocp-Apim-Subscription-Key", "949ecacfda8e4acc8bff7fddd082ddab")
-                .header("Ocp-Apim-Subscription-Region", "westus2")
+                .header("Ocp-Apim-Subscription-Key", azureApiKey)
+                .header("Ocp-Apim-Subscription-Region", apiRegion)
                 .POST(HttpRequest.BodyPublishers.ofString(body))
                 .build();
 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            // Step 6: Display Results
+            // Display Results
             String responseBody = response.body();
 
             System.out.println("Response from server: " + responseBody); // Print the raw response to understand its
@@ -61,9 +64,12 @@ public class App {
             JSONObject firstTranslation = translations.getJSONObject(0);
             String translatedText = firstTranslation.getString("text");
 
-            System.out.println(
-                    "Azure AI detected your entry text as: " + language);
+            System.out.println("Azure AI detected your entry text as: " + language);
             System.out.println("Translated Text: " + translatedText);
+        } catch (IOException e) {
+            System.err.println("I/O Error during API request: " + e.getMessage());
+        } catch (InterruptedException e) {
+            System.err.println("Request was interrupted: " + e.getMessage());
         } catch (Exception e) {
             System.err.println("Error during API request: " + e.getMessage());
         }
