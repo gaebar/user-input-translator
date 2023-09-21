@@ -1,4 +1,4 @@
-# User Input Translator
+# User Input Translator API
 
 A simple and interactive console application developed in Java, leveraging **Azure AI services** for translating user input text between various languages using the Translator API.
 
